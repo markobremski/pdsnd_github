@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 
 # Set to Display All Columns
+# This is necessary to view all columns when viewing raw data
 pd.set_option('display.max_columns', None)
 
 CITY_DATA = { 'chicago': 'chicago.csv',
@@ -20,7 +21,7 @@ def yes_no(prompt):
             return False
         else:
             print ('Response ' + choice + ' is INVALID! Please tray again: ')
-    
+
 
 def display_banner():
     # Displays opening banner with greeting based on hour of the day.
@@ -30,11 +31,11 @@ def display_banner():
     elif current_hour >= 12 and current_hour < 18 :
         greeting = "Good Afternoon!"
     elif current_hour >= 18 :
-        greeting = 'Good Evening!'   
+        greeting = 'Good Evening!'
     length_greeting = len(greeting)
     print('-'*(38+length_greeting))
     print(f'{greeting} Let\'s explore some US bikeshare data!')
-    print('-'*(38+length_greeting))    
+    print('-'*(38+length_greeting))
 
 
 
@@ -59,10 +60,10 @@ def city_menu_choice():
         else:
             print(f'City Choice {choice} is INVALID! Please enter 1, 2 or 3: ')
     print(f'Bikeshare City data to explore is: {city}')
-    return city.lower() 
+    return city.lower()
 
 
-  
+
 def month_menu_choice():
     # Displays month filter menu choices (saves typing) and validates input
     print ("\nMonth Filter Menu")
@@ -93,7 +94,7 @@ def month_menu_choice():
             break;
         elif choice == '6':
             month = 'June'
-            break;            
+            break;
         elif choice == '0':
             month = 'all'
             print('Bikeshare Data Results will include All Months!')
@@ -139,7 +140,7 @@ def day_menu_choice():
             break;
         elif choice == '7':
             day = 'Saturday'
-            break;            
+            break;
         elif choice == '0':
             day = 'all'
             print('Bikeshare Data Results will include All Days!')
@@ -174,7 +175,7 @@ def get_filters():
     # Obtain user input for city, month and day
     city = city_menu_choice()
     month = month_menu_choice()
-    day = day_menu_choice()   
+    day = day_menu_choice()
     return city, month, day
 
 
@@ -202,7 +203,7 @@ def load_data(city, month, day):
     if month != 'all':
         # use the index of the months list to get the corresponding int
         months = ['January', 'February', 'March', 'April', 'May', 'June']
-        month = months.index(month) + 1       
+        month = months.index(month) + 1
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
     # filter by day of week if applicable
@@ -282,7 +283,7 @@ def user_stats(df):
         df_gender_subset = df.dropna(subset=['Gender'])
         print(df_gender_subset['Gender'].value_counts())
     except KeyError:
-        print ('Gender values do not exist in this BikeShare dataset!')    
+        print ('Gender values do not exist in this BikeShare dataset!')
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
     # Display earliest, most recent, and most common year of birth
@@ -293,12 +294,12 @@ def user_stats(df):
         df_birthyear_subset = df.dropna(subset=['Birth Year'])
         minvalue = round(df_birthyear_subset['Birth Year'].min())
         print(f'Earliest Birth Year:  {minvalue}')
-        
+
         maxvalue = round(df_birthyear_subset['Birth Year'].max())
         print(f'Most Recent Birth Year:  {maxvalue}')
-        
+
         modevalue = round(df_birthyear_subset['Birth Year'].mode()[0])
-        print(f'Most Common Birth Year:  {modevalue}')        
+        print(f'Most Common Birth Year:  {modevalue}')
     except KeyError:
         print ('Birth Year values do not exist in this BikeShare dataset!')
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -314,7 +315,7 @@ def view_data_records(df):
     if 'Birth Year' in df.columns:
         df['Birth Year'] = df['Birth Year'].fillna('0')
         df['Birth Year'] = df['Birth Year'].astype(int)
-        df['Birth Year'] = df['Birth Year'].replace(0,'')   
+        df['Birth Year'] = df['Birth Year'].replace(0,'')
     response = yes_no('\n\nWould you like to view the first 5 individual trip data records? ')
     while response:
         print('-'*72)
@@ -322,7 +323,7 @@ def view_data_records(df):
         print('-'*72)
         start_row += 5
         response = yes_no('\nWould you like to view 5 more individual trip data records? ')
-    
+
 
 
 def main():
