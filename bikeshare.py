@@ -310,7 +310,7 @@ def user_stats(df):
 def view_data_records(df):
     """ Allows user the option to view 5 data records at a time. """
     # Initialize Start Row
-    start_row = 0 # Initialize Start Row
+    start_row = 0
     #Check if Birth Year column exists to avoid KeyError
     if 'Birth Year' in df.columns:
         df['Birth Year'] = df['Birth Year'].fillna('0')
