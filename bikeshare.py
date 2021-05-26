@@ -1,6 +1,6 @@
 import time
 import pandas as pd
-import numpy as np
+
 
 # Set to Display All Columns
 # This is necessary to view all columns when viewing raw data
@@ -20,7 +20,7 @@ def yes_no(prompt):
         elif choice.lower() == 'no':
             return False
         else:
-            print ('Response ' + choice + ' is INVALID! Please tray again: ')
+            print (f'Response {choice} is INVALID! Please tray again: ')
 
 
 def display_banner():
